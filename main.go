@@ -39,7 +39,7 @@ func main() {
 		rate_limiters.FixedWindowCounterRateLimiter()
 	case 4:
 		fmt.Println("You selected Sliding Window Log Rate Limiter")
-		// rate_limiters.SlidingWindowLogRateLimiter()
+		rate_limiters.SlidingWindowLogRateLimiter()
 	case 5:
 		fmt.Println("You selected Sliding Window Counter Rate Limiter")
 		// rate_limiters.SlidingWindowCounterRateLimiter()
