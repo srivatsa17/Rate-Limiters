@@ -36,13 +36,13 @@ func main() {
 		rate_limiters.LeakyBucketRateLimiter()
 	case 3:
 		fmt.Println("You selected Fixed Window Counter Rate Limiter")
-		// rate_limiters.FixedWindowCounter()
+		rate_limiters.FixedWindowCounterRateLimiter()
 	case 4:
 		fmt.Println("You selected Sliding Window Log Rate Limiter")
-		// rate_limiters.SlidingWindowLog()
+		// rate_limiters.SlidingWindowLogRateLimiter()
 	case 5:
 		fmt.Println("You selected Sliding Window Counter Rate Limiter")
-		// rate_limiters.SlidingWindowCounter()
+		// rate_limiters.SlidingWindowCounterRateLimiter()
 	default:
 		fmt.Println("Invalid option. Please select a number between 1 and 5.")
 		os.Exit(1)

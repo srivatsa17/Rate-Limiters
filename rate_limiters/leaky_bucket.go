@@ -59,9 +59,9 @@ func LeakyBucketRateLimiter() {
 
 	for i := 1; i <= 10; i++ {
 		if lb.AllowRequest() {
-			fmt.Printf("%d Request allowed at %v.\n", i, time.Now().Local())
+			fmt.Printf("%d Request allowed at %v.\n", i, time.Now().Local().Format("15:04:05"))
 		} else {
-			fmt.Printf("%d Request denied at %v.\n", i, time.Now().Local())
+			fmt.Printf("%d Request denied at %v.\n", i, time.Now().Local().Format("15:04:05"))
 		}
 		time.Sleep(600 * time.Millisecond)
 	}

@@ -43,7 +43,7 @@ func (tb *TokenBucket) refillTokens() {
 		if refillTokens > 0 {
 			tb.tokens = min(tb.capacity, tb.tokens+refillTokens)
 			tb.lastRefilledAt = time.Now()
-			fmt.Printf("Bucket was refilled at %v with %v tokens\n", tb.lastRefilledAt.Local(), tb.tokens)
+			fmt.Printf("Bucket was refilled at %v with %v tokens\n", tb.lastRefilledAt.Local().Format("15:04:05"), tb.tokens)
 		}
 		tb.mu.Unlock()
 	}
