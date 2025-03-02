@@ -42,7 +42,7 @@ func main() {
 		rate_limiters.SlidingWindowLogRateLimiter()
 	case 5:
 		fmt.Println("You selected Sliding Window Counter Rate Limiter")
-		// rate_limiters.SlidingWindowCounterRateLimiter()
+		rate_limiters.SlidingWindowCounterRateLimiter()
 	default:
 		fmt.Println("Invalid option. Please select a number between 1 and 5.")
 		os.Exit(1)
