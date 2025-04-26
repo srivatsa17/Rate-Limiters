@@ -18,7 +18,6 @@ type TokenBucket struct {
 	tokens         int
 	mu             sync.Mutex
 	lastRefilledAt time.Time
-	refillTicker   *time.Ticker
 }
 
 func NewTokenBucket(capacity, rate int) *TokenBucket {
@@ -29,29 +28,20 @@ func NewTokenBucket(capacity, rate int) *TokenBucket {
 		lastRefilledAt: time.Now(),
 	}
 
-	tb.refillTicker = time.NewTicker(time.Second)
-	go tb.refillTokens()
-
 	return tb
-}
-
-func (tb *TokenBucket) refillTokens() {
-	for range tb.refillTicker.C {
-		tb.mu.Lock()
-		elapsed := time.Since(tb.lastRefilledAt).Seconds()
-		refillTokens := int(elapsed) * tb.rate
-		if refillTokens > 0 {
-			tb.tokens = min(tb.capacity, tb.tokens+refillTokens)
-			tb.lastRefilledAt = time.Now()
-			fmt.Printf("Bucket was refilled at %v with %v tokens\n", tb.lastRefilledAt.Local().Format("15:04:05"), tb.tokens)
-		}
-		tb.mu.Unlock()
-	}
 }
 
 func (tb *TokenBucket) AllowRequest() bool {
 	tb.mu.Lock()
 	defer tb.mu.Unlock()
+
+	elapsed := time.Since(tb.lastRefilledAt).Seconds()
+	refillTokens := int(elapsed) * tb.rate
+	if refillTokens > 0 {
+		tb.tokens = min(tb.capacity, tb.tokens+refillTokens)
+		tb.lastRefilledAt = time.Now()
+		fmt.Printf("Bucket was refilled at %v with %v tokens\n", tb.lastRefilledAt.Local().Format("15:04:05"), tb.tokens)
+	}
 
 	if tb.tokens > 0 {
 		tb.tokens--
