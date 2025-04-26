@@ -3,6 +3,8 @@ package leakybucket
 import (
 	"sync"
 	"time"
+
+	rl "github.com/srivatsa17/Rate-Limiters/internal/rate_limiters"
 )
 
 // How does Leaky Bucket work ?
@@ -18,7 +20,7 @@ type LeakyBucket struct {
 	leakTicker *time.Ticker
 }
 
-func NewLeakyBucket(capacity int, rate time.Duration) *LeakyBucket {
+func NewLeakyBucket(capacity int, rate time.Duration) rl.RateLimiter {
 	lb := &LeakyBucket{
 		capacity: capacity,
 		rate:     rate,

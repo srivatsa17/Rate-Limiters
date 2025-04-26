@@ -3,6 +3,8 @@ package slidingwindowcounter
 import (
 	"sync"
 	"time"
+
+	rl "github.com/srivatsa17/Rate-Limiters/internal/rate_limiters"
 )
 
 // How does Sliding Window Counter work ?
@@ -19,7 +21,7 @@ type SlidingWindowCounter struct {
 	lastTick      time.Time
 }
 
-func NewSlidingWindowCounter(capacity int, window time.Duration) *SlidingWindowCounter {
+func NewSlidingWindowCounter(capacity int, window time.Duration) rl.RateLimiter {
 	return &SlidingWindowCounter{
 		capacity: capacity,
 		window:   window,

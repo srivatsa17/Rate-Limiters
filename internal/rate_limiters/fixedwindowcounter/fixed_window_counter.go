@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"sync"
 	"time"
+
+	rl "github.com/srivatsa17/Rate-Limiters/internal/rate_limiters"
 )
 
 // How Fixed Window Counter works
@@ -19,7 +21,7 @@ type FixedWindowCounter struct {
 	timeStamp time.Time
 }
 
-func NewFixedWindowCounter(capacity int, window time.Duration) *FixedWindowCounter {
+func NewFixedWindowCounter(capacity int, window time.Duration) rl.RateLimiter {
 	return &FixedWindowCounter{
 		capacity: capacity,
 		window: window,

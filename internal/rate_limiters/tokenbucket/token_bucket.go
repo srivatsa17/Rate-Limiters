@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"sync"
 	"time"
+
+	rl "github.com/srivatsa17/Rate-Limiters/internal/rate_limiters"
 )
 
 // How does Token Bucket Work ?
@@ -20,7 +22,7 @@ type TokenBucket struct {
 	lastRefilledAt time.Time
 }
 
-func NewTokenBucket(capacity, rate int) *TokenBucket {
+func NewTokenBucket(capacity, rate int) rl.RateLimiter {
 	tb := &TokenBucket{
 		capacity:       capacity,
 		tokens:         capacity,

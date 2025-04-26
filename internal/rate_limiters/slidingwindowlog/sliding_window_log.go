@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"sync"
 	"time"
+
+	rl "github.com/srivatsa17/Rate-Limiters/internal/rate_limiters"
 )
 
 // How does Sliding Window Log work ?
@@ -20,7 +22,7 @@ type SlidingWindowLog struct {
 	mu       sync.Mutex
 }
 
-func NewSlidingWindowLog(capacity int, window time.Duration) *SlidingWindowLog {
+func NewSlidingWindowLog(capacity int, window time.Duration) rl.RateLimiter {
 	return &SlidingWindowLog{
 		capacity: capacity,
 		window:   window,
