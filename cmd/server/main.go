@@ -9,6 +9,11 @@ import (
 	"time"
 
 	"github.com/srivatsa17/Rate-Limiters/internal/rate_limiters"
+	"github.com/srivatsa17/Rate-Limiters/internal/rate_limiters/fixedwindowcounter"
+	"github.com/srivatsa17/Rate-Limiters/internal/rate_limiters/leakybucket"
+	"github.com/srivatsa17/Rate-Limiters/internal/rate_limiters/slidingwindowcounter"
+	"github.com/srivatsa17/Rate-Limiters/internal/rate_limiters/slidingwindowlog"
+	"github.com/srivatsa17/Rate-Limiters/internal/rate_limiters/tokenbucket"
 )
 
 func main() {
@@ -49,23 +54,23 @@ func handleChoice(choice int) {
 	switch choice {
 	case 1:
 		fmt.Println("\nYou selected: Token Bucket Rate Limiter")
-		tb := rate_limiters.NewTokenBucket(10, 2)
+		tb := tokenbucket.NewTokenBucket(10, 2)
 		rate_limiters.PerformRateLimiting(tb)
 	case 2:
 		fmt.Println("\nYou selected: Leaky Bucket Rate Limiter")
-		lb := rate_limiters.NewLeakyBucket(3, time.Second)
+		lb := leakybucket.NewLeakyBucket(3, time.Second)
 		rate_limiters.PerformRateLimiting(lb)
 	case 3:
 		fmt.Println("\nYou selected: Fixed Window Counter Rate Limiter")
-		fw := rate_limiters.NewFixedWindowCounter(3, time.Second)
+		fw := fixedwindowcounter.NewFixedWindowCounter(3, time.Second)
 		rate_limiters.PerformRateLimiting(fw)
 	case 4:
 		fmt.Println("\nYou selected: Sliding Window Log Rate Limiter")
-		swl := rate_limiters.NewSlidingWindowLog(2, 2*time.Second)
+		swl := slidingwindowlog.NewSlidingWindowLog(2, 2*time.Second)
 		rate_limiters.PerformRateLimiting(swl)
 	case 5:
 		fmt.Println("\nYou selected: Sliding Window Counter Rate Limiter")
-		swc := rate_limiters.NewSlidingWindowCounter(3, 10*time.Second)
+		swc := slidingwindowcounter.NewSlidingWindowCounter(3, 10*time.Second)
 		rate_limiters.PerformRateLimiting(swc)
 	default:
 		fmt.Println("Invalid option. Please select a number between 1 and 5.")

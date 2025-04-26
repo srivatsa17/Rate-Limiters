@@ -1,4 +1,4 @@
-package rate_limiters
+package slidingwindowlog
 
 import (
 	"fmt"

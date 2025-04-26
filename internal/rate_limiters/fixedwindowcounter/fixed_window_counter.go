@@ -1,4 +1,4 @@
-package rate_limiters
+package fixedwindowcounter
 
 import (
 	"fmt"
