@@ -1,7 +1,6 @@
 package rate_limiters
 
 import (
-	"fmt"
 	"sync"
 	"time"
 )
@@ -40,8 +39,8 @@ func (sw *SlidingWindowCounter) AllowRequest() bool {
 		sw.currentCount = 0
 		sw.lastTick = now
 	} else if elapsed > 0 {
-		weight := float64(sw.window - elapsed) / float64(sw.window)
-		threshold := sw.previousCount * int(weight) + sw.currentCount
+		weight := float64(sw.window-elapsed) / float64(sw.window)
+		threshold := sw.previousCount*int(weight) + sw.currentCount
 
 		if threshold >= sw.capacity {
 			return false
@@ -50,18 +49,4 @@ func (sw *SlidingWindowCounter) AllowRequest() bool {
 
 	sw.currentCount++
 	return true
-}
-
-func SlidingWindowCounterRateLimiter() {
-	fmt.Println("Rate Limiter with Sliding Window Counter")
-	sw := NewSlidingWindowCounter(3, 10 * time.Second)
-
-	for i := 1; i <= 10; i++ {
-		if sw.AllowRequest() {
-			fmt.Printf("%d Request allowed at %v.\n", i, time.Now().Local().Format("15:04:05"))
-		} else {
-			fmt.Printf("%d Request allowed at %v.\n", i, time.Now().Local().Format("15:04:05"))
-		}
-		time.Sleep(2 * time.Second)
-	}
 }

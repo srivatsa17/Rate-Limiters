@@ -46,17 +46,3 @@ func (fw *FixedWindowCounter) AllowRequest() bool {
 
 	return false
 }
-
-func FixedWindowCounterRateLimiter() {
-	fmt.Println("Fixed Window Counter Algorithm")
-	fw := NewFixedWindowCounter(3, time.Second)
-	
-	for i := 1; i <= 10; i++ {
-		if fw.AllowRequest() {
-			fmt.Printf("%d Request allowed at %v.\n", i, fw.timeStamp.Local().Format("15:04:05"))
-		} else {
-			fmt.Printf("%d Request denied at %v.\n", i, fw.timeStamp.Local().Format("15:04:05"))
-		}
-		time.Sleep(200 * time.Millisecond)
-	}
-}

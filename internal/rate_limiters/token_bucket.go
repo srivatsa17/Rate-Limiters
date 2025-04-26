@@ -50,17 +50,3 @@ func (tb *TokenBucket) AllowRequest() bool {
 
 	return false
 }
-
-func TokenBucketRateLimiter() {
-	fmt.Println("Token Bucket Algorithm")
-	tb := NewTokenBucket(10, 2)
-
-	for i := range 15 {
-		if tb.AllowRequest() {
-			fmt.Printf("Request %d was allowed, current token count = %d\n", i, tb.tokens)
-		} else {
-			fmt.Printf("Request %d was denied, current token count = %d\n", i, tb.tokens)
-		}
-		time.Sleep(600 * time.Millisecond)
-	}
-}

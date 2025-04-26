@@ -59,17 +59,3 @@ func (sw *SlidingWindowLog) Cleanup(now time.Time) {
 		sw.requests = sw.requests[index:]
 	}
 }
-
-func SlidingWindowLogRateLimiter() {
-	fmt.Println("Sliding Window Log Algorithm")
-	sw := NewSlidingWindowLog(2, 2 * time.Second)
-
-	for i := 1; i <= 10; i++ {
-		if sw.AllowRequest() {
-			fmt.Printf("%d Request allowed at %v.\n", i, time.Now().Local().Format("15:04:05"))
-		} else {
-			fmt.Printf("%d Request allowed at %v.\n", i, time.Now().Local().Format("15:04:05"))
-		}
-		time.Sleep(500 * time.Millisecond)
-	}
-}

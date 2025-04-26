@@ -105,4 +105,4 @@ Now, when a new request comes, you add one to that weight (weight + 1). If this 
 
 ### How to run ?
 
-On the terminal, run the `Rate-Limiters` binary and enter the possible options of the algorithms
+On the terminal, run the `make run` binary and enter the possible options of the algorithms
